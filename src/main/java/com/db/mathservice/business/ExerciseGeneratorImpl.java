@@ -28,6 +28,7 @@ public class ExerciseGeneratorImpl implements ExerciseGenerator {
         this.argumentSubstitutor = argumentSubstitutor;
     }
 
+    @Override
     public Exercise generateExercise(ExerciseConfiguration exerciseConfiguration) {
         String format = exerciseConfiguration.getFormat();
         Map<String, Range> rangeMap = exerciseConfiguration.getRanges();
