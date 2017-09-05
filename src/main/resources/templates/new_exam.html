@@ -1,12 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>New exam template</title>
 </head>
+<script>
+    var xhr = new XMLHttpRequest();
+
+    function onClick() {
+        var form = document.getElementById("constraints");
+        var formData = new FormData(form);
+
+        xhr.open("POST", "/parse_expression", true);
+        xhr.send(formData);
+        xhr.onreadystatechange = function() {
+            if (this.readyState != 4) {
+                return;
+             }
+            addFieldsToForm(this.responseText);
+        }
+    }
+
+    function addFieldsToForm(args) {
+        var form = document.getElementById("constraints");
+        var divConfigs = document.createElement("div");
+        divConfigs.setAttribute("id", "constraints-configuration");
+        form.appendChild(divConfigs);
+        var inputFrom;
+        var inputTo;
+        JSON.parse(args).forEach(function(arg) {
+            divConfigs.appendChild(document.createTextNode(arg + " from "));
+            inputFrom = document.createElement("input");
+            inputFrom.type = "number";
+            inputFrom.name = arg + ".from";
+            divConfigs.appendChild(inputFrom);
+
+            divConfigs.appendChild(document.createTextNode(" to "));
+            inputTo = document.createElement("input");
+            inputTo.type = "number";
+            inputTo.name = arg + ".to";
+            divConfigs.appendChild(inputTo);
+            divConfigs.appendChild(document.createElement("br"));
+        });
+
+        var button = document.createElement("input");
+        button.type = "button";
+        button.value = "Submit";
+        button.onclick = onSubmit;
+        divConfigs.appendChild(button);
+    }
+
+    function onSubmit() {
+        var form = document.getElementById("constraints");
+        var formData = new FormData(form);
+
+        xhr.open("POST", "/ololo", true);
+        xhr.send(formData);
+        xhr.onreadystatechange = function() {
+            if (this.readyState != 4) {
+                return;
+            }
+            form.removeChild(document.getElementById("constraints-configuration"));
+            console.log(this.status)
+        }
+    }
+
+</script>
 <body>
 <label>
-    <input type="text" autofocus placeholder="Enter exam title">
+    <input type="text" placeholder="Enter exam title"/>
 </label>
+<form id="constraints" name="constraints">
+    Enter a b c <br/>
+    <input type="text" name="expression" id="expression" placeholder="Configuration"/>
+    <br/>
+    <input type="button" onclick="onClick()" id="submit" value="OK"/>
+    <br/>
+</form>
+
 </body>
 </html>
