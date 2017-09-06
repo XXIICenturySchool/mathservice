@@ -53,7 +53,7 @@
     }
 
     function send_exam() {
-        xhr.open("POST", "/send_exam", true);
+        xhr.open("POST", "/save_exam", true);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         let examToSend = {};
         examToSend.title = document.getElementById("exam_title").value;

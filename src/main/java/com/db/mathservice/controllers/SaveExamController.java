@@ -15,10 +15,10 @@ import java.util.List;
  */
 @RestController
 @AllArgsConstructor
-public class SendExamController {
+public class SaveExamController {
     ExamConfigurationRepository repository;
 
-    @PostMapping("/send_exam")
+    @PostMapping("/save_exam")
     public String addExam(@RequestBody InputExamConfiguration inputConfiguration) {
         ExamConfiguration.ExamConfigurationBuilder configurationBuilder = ExamConfiguration.builder()
                 .title(inputConfiguration.getTitle())
