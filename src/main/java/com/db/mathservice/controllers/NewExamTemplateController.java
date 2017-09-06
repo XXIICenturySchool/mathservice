@@ -10,8 +10,6 @@ import java.util.List;
 
 @Controller
 public class NewExamTemplateController {
-    NewTemplateWizardStep currentStep = NewTemplateWizardStep.CHOOSE_TYPE;
-
     @RequestMapping("/new_exam")
     public String newExam(@RequestParam(value="teacherId") int teacherId, Model model) {
         return "new_exam";

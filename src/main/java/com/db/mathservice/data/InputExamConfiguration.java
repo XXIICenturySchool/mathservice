@@ -11,5 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 public class InputExamConfiguration {
     private String title;
+    private int teacherId;
     private List<InputExerciseConfiguration> inputConfigurations;
 }

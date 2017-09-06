@@ -1,6 +1,7 @@
 package com.db.mathservice.data;
 
 import lombok.*;
+import org.springframework.data.annotation.Id;
 
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 public class ExamConfiguration {
+    @Id
     private int id;
     private int teacherId;
     private String title;

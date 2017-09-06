@@ -58,6 +58,7 @@
         let examToSend = {};
         examToSend.title = document.getElementById("exam_title").value;
         examToSend.inputConfigurations = exam;
+        examToSend.teacherId = (new URL(window.location.href)).searchParams.get("teacherId");
 
         console.log(JSON.stringify(examToSend));
 
