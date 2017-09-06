@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>New exam template</title>
+    <script type="text/javascript" th:src="@{/js/table_script.js}" ></script>
 </head>
 <script>
     var xhr = new XMLHttpRequest();
+    var exam =[]
 
     function onClick() {
         var form = document.getElementById("constraints");
@@ -13,10 +15,10 @@
 
         xhr.open("POST", "/parse_expression", true);
         xhr.send(formData);
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (this.readyState != 4) {
                 return;
-             }
+            }
             addFieldsToForm(this.responseText);
         }
     }
@@ -28,7 +30,7 @@
         form.appendChild(divConfigs);
         var inputFrom;
         var inputTo;
-        JSON.parse(args).forEach(function(arg) {
+        JSON.parse(args).forEach(function (arg) {
             divConfigs.appendChild(document.createTextNode(arg + " from "));
             inputFrom = document.createElement("input");
             inputFrom.type = "number";
@@ -53,20 +55,48 @@
     function onSubmit() {
         var form = document.getElementById("constraints");
         var formData = new FormData(form);
+        var newExerciseConfiguration = {};
+        newExerciseConfiguration.variables = [];
+        var newVariable = {};
 
-        xhr.open("POST", "/ololo", true);
-        xhr.send(formData);
-        console.log(formData);
-        xhr.onreadystatechange = function() {
-            if (this.readyState != 4) {
-                return;
+        for (var pair of formData.entries()) {
+            if (pair[0].endsWith(".from")) {
+                newVariable.varName = pair[0].split('.')[0];
+                newVariable.from = pair[1];
             }
-            form.removeChild(document.getElementById("constraints-configuration"));
-            console.log(this.status)
+            if (pair[0].endsWith(".to")) {
+                newVariable.to = pair[1];
+                newExerciseConfiguration.variables.push(newVariable);
+                newVariable = {};
+            }
+            if (pair[0] === "expression") {
+                newExerciseConfiguration[pair[0]] = pair[1];
+            }
+            if (pair[0] === "amount") {
+                newExerciseConfiguration[pair[0]] = pair[1];
+            }
         }
+        exam.push(newExerciseConfiguration);
+        draw_table();
+
+
+
+//        console.log(JSON.stringify(newExerciseConfiguration));
+
+//        xhr.open("POST", "/ololo", true);
+//        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+//        xhr.send(JSON.stringify(newExerciseConfiguration));
+//        xhr.onreadystatechange = function () {
+//            if (this.readyState != 4) {
+//                return;
+//            }
+            form.removeChild(document.getElementById("constraints-configuration"));
+//            console.log(this.status)
+//        }
     }
 
 </script>
+
 <body>
 <label>
     <input type="text" placeholder="Enter exam title"/>
@@ -74,10 +104,22 @@
 <form id="constraints" name="constraints">
     Enter a b c <br/>
     <input type="text" name="expression" id="expression" placeholder="Configuration"/>
+    <input type="number" name="amount" id="amount" placeholder="Amount"/>
     <br/>
     <input type="button" onclick="onClick()" id="submit" value="OK"/>
     <br/>
 </form>
+
+<div id="wrapper">
+<table align="center" cellspacing="2" cellpadding="5" id="data_table" border="1">
+    <tr>
+        <th>#</th>
+        <th>Configuration</th>
+        <th>Amount</th>
+    </tr>
+
+</table>
+</div>
 
 </body>
 </html>
