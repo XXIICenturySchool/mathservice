@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8"/>
     <title>New exam template</title>
-    <script type="text/javascript" th:src="@{/js/table_script.js}" ></script>
+    <script type="text/javascript" th:src="@{/js/table_script.js}"></script>
 </head>
 <script>
     var xhr = new XMLHttpRequest();
-    var exam =[]
+    var exam = []
 
     function onClick() {
         var form = document.getElementById("constraints");
@@ -52,6 +52,23 @@
         divConfigs.appendChild(button);
     }
 
+    function send_exam() {
+        xhr.open("POST", "/send_exam", true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        let examToSend = {};
+        examToSend.title = document.getElementById("exam_title").value;
+        examToSend.inputConfigurations = exam;
+
+        console.log(JSON.stringify(examToSend));
+
+        xhr.send(JSON.stringify(examToSend));
+        xhr.onreadystatechange = function () {
+            if (this.readyState != 4) {
+                return;
+            }
+        }
+    }
+
     function onSubmit() {
         var form = document.getElementById("constraints");
         var formData = new FormData(form);
@@ -79,27 +96,14 @@
         exam.push(newExerciseConfiguration);
         draw_table();
 
-
-
-//        console.log(JSON.stringify(newExerciseConfiguration));
-
-//        xhr.open("POST", "/ololo", true);
-//        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-//        xhr.send(JSON.stringify(newExerciseConfiguration));
-//        xhr.onreadystatechange = function () {
-//            if (this.readyState != 4) {
-//                return;
-//            }
-            form.removeChild(document.getElementById("constraints-configuration"));
-//            console.log(this.status)
-//        }
+        form.removeChild(document.getElementById("constraints-configuration"));
     }
 
 </script>
 
 <body>
 <label>
-    <input type="text" placeholder="Enter exam title"/>
+    <input type="text" id="exam_title" placeholder="Enter exam title"/>
 </label>
 <form id="constraints" name="constraints">
     Enter a b c <br/>
@@ -109,16 +113,17 @@
     <input type="button" onclick="onClick()" id="submit" value="OK"/>
     <br/>
 </form>
+<input type="button" onclick="send_exam()" id="save_exam" value="Save exam"/>
 
 <div id="wrapper">
-<table align="center" cellspacing="2" cellpadding="5" id="data_table" border="1">
-    <tr>
-        <th>#</th>
-        <th>Configuration</th>
-        <th>Amount</th>
-    </tr>
+    <table align="center" cellspacing="2" cellpadding="5" id="data_table" border="1">
+        <tr>
+            <th>#</th>
+            <th>Configuration</th>
+            <th>Amount</th>
+        </tr>
 
-</table>
+    </table>
 </div>
 
 </body>
