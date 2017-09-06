@@ -12,7 +12,7 @@ import java.util.Map;
 @NoArgsConstructor
 public class ExamConfiguration {
     @Id
-    private int id;
+    private String id;
     private int teacherId;
     private String title;
     @Singular
