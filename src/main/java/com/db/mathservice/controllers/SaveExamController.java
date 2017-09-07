@@ -18,6 +18,7 @@ public class SaveExamController {
     @PostMapping("/save_exam")
     public String addExam(@RequestBody ExamConfiguration inputConfiguration) {
         repository.save(inputConfiguration);
+        //TODO register exam
         return "exams";
     }
 
