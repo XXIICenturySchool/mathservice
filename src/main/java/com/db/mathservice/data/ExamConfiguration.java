@@ -14,6 +14,7 @@ import java.util.List;
 public class ExamConfiguration {
     @Id
     private String id;
+    private String globalId;
     private String title;
     private String teacherId;
     private String type;

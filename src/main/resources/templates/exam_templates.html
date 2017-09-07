@@ -5,8 +5,11 @@
 <head>
     <title>Exams</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <script>
-        function newExam() {
+    <script>function editExam() {
+
+    }
+
+    function newExam() {
             window.location.href = window.location.href.replace("exam_templates", "choose_exam_type");
         }
     </script>
@@ -18,12 +21,14 @@
         <thead>
         <tr>
             <th>Title</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         <!--/*@thymesVar id="examConfigurations" type="com.db.mathservice.data.ExamConfiguration"*/-->
         <tr th:each="examConfiguration : ${examConfigurations}">
             <td th:text="${examConfiguration.title}">&nbsp;</td>
+            <td><input type="button" onclick="editExam()"/></td>
         </tr>
         </tbody>
     </table>

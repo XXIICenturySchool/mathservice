@@ -49,7 +49,7 @@ function send_exam() {
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     let examToSend = {};
     examToSend.title = document.getElementById("exam_title").value;
-    examToSend.inputConfigurations = exam;
+    examToSend.exerciseConfigurations = exam;
     examToSend.type = "math.equation";
     examToSend.teacherId = (new URL(window.location.href)).searchParams.get("teacherId");
 

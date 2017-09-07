@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>New exam template</title>
+    <script type="text/javascript" th:src="@{/js/table_script.js}"></script>
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+</head>
+
+<body>
+<div id="new_exam_wrapper" style="float: left; margin-left: 10%;margin-top: 50px">
+    <label>
+        <input type="text" id="exam_title" placeholder="Exam title" style="margin-bottom: 30px; margin-top: 20px"/>
+        <input type="button" onclick="send_exam()" id="save_exam" value="Save exam" style="margin-right: 100px"/>
+    </label>
+    <form id="constraints" name="constraints">
+
+        <p><b>a+b</b></p> <br/>
+        <input type="text" name="template" id="template" placeholder="Configuration"/>
+        <input type="number" name="amount" id="amount" placeholder="Amount"/>
+        <br/>
+        <input type="button" onclick="onClick()" id="submit" value="OK"/>
+        <br/>
+    </form>
+</div>
+
+</body>
+</html>
