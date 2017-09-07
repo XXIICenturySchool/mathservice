@@ -1,20 +1,17 @@
 package com.db.mathservice.data;
 
-import lombok.*;
-import org.springframework.data.annotation.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Map;
 
 @Data
 @AllArgsConstructor
-@Builder
 @NoArgsConstructor
 public class ExamConfiguration {
-    @Id
-    private String id;
-    private int teacherId;
     private String title;
-    @Singular
-    private List<ExerciseConfigurationCounted> configurations;
+    private int teacherId;
+    private String type;
+    private List<ExerciseConfiguration> inputConfigurations;
 }

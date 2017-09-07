@@ -1,14 +1,15 @@
 package com.db.mathservice.data;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 
-@Data
+/**
+ * Created by Valentin on 07.09.2017.
+ */
 @AllArgsConstructor
-@Builder
-public class Exercise {
-    private String question;
-    private final String type = "math.arithmetic";
-    private String answer;
+@Data
+public abstract class Exercise {
+    protected String type;
+    protected String question;
+    protected String answer;
 }

@@ -1,6 +1,6 @@
 package com.db.mathservice;
 
-import com.db.mathservice.business.ArgumentSubstitutorImpl;
+import com.db.mathservice.business.ArgumentSubstituterImpl;
 import com.db.mathservice.data.Range;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ArgumentSubstitutorImplTest {
+public class ArgumentSubstituterImplTest {
     @Autowired
-    ArgumentSubstitutorImpl argumentSubstitutorImpl;
+    ArgumentSubstituterImpl argumentSubstitutorImpl;
 
     @Test
     public void expressionWithNoArgumentsDoesNotSubstitute() throws Exception {
