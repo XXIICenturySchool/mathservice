@@ -4,120 +4,28 @@
     <meta charset="UTF-8"/>
     <title>New exam template</title>
     <script type="text/javascript" th:src="@{/js/table_script.js}"></script>
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.js}"/>
 </head>
-<script>
-    var xhr = new XMLHttpRequest();
-    var exam = []
-
-    function onClick() {
-        var form = document.getElementById("constraints");
-        var formData = new FormData(form);
-
-        xhr.open("POST", "/parse_expression", true);
-        xhr.send(formData);
-        xhr.onreadystatechange = function () {
-            if (this.readyState != 4) {
-                return;
-            }
-            addFieldsToForm(this.responseText);
-        }
-    }
-
-    function addFieldsToForm(args) {
-        var form = document.getElementById("constraints");
-        var divConfigs = document.createElement("div");
-        divConfigs.setAttribute("id", "constraints-configuration");
-        form.appendChild(divConfigs);
-        var inputFrom;
-        var inputTo;
-        JSON.parse(args).forEach(function (arg) {
-            divConfigs.appendChild(document.createTextNode(arg + " from "));
-            inputFrom = document.createElement("input");
-            inputFrom.type = "number";
-            inputFrom.name = arg + ".from";
-            divConfigs.appendChild(inputFrom);
-
-            divConfigs.appendChild(document.createTextNode(" to "));
-            inputTo = document.createElement("input");
-            inputTo.type = "number";
-            inputTo.name = arg + ".to";
-            divConfigs.appendChild(inputTo);
-            divConfigs.appendChild(document.createElement("br"));
-        });
-
-        var button = document.createElement("input");
-        button.type = "button";
-        button.value = "Submit";
-        button.onclick = onSubmit;
-        divConfigs.appendChild(button);
-    }
-
-    function send_exam() {
-        xhr.open("POST", "/save_exam", true);
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        let examToSend = {};
-        examToSend.title = document.getElementById("exam_title").value;
-        examToSend.inputConfigurations = exam;
-        examToSend.teacherId = (new URL(window.location.href)).searchParams.get("teacherId");
-
-        console.log(JSON.stringify(examToSend));
-
-        xhr.send(JSON.stringify(examToSend));
-        xhr.onreadystatechange = function () {
-            if (this.readyState != 4) {
-                return;
-            }
-        }
-    }
-
-    function onSubmit() {
-        var form = document.getElementById("constraints");
-        var formData = new FormData(form);
-        var newExerciseConfiguration = {};
-        newExerciseConfiguration.variables = [];
-        var newVariable = {};
-
-        for (var pair of formData.entries()) {
-            if (pair[0].endsWith(".from")) {
-                newVariable.varName = pair[0].split('.')[0];
-                newVariable.from = pair[1];
-            }
-            if (pair[0].endsWith(".to")) {
-                newVariable.to = pair[1];
-                newExerciseConfiguration.variables.push(newVariable);
-                newVariable = {};
-            }
-            if (pair[0] === "expression") {
-                newExerciseConfiguration[pair[0]] = pair[1];
-            }
-            if (pair[0] === "amount") {
-                newExerciseConfiguration[pair[0]] = pair[1];
-            }
-        }
-        exam.push(newExerciseConfiguration);
-        draw_table();
-
-        form.removeChild(document.getElementById("constraints-configuration"));
-    }
-
-</script>
 
 <body>
-<label>
-    <input type="text" id="exam_title" placeholder="Enter exam title"/>
-</label>
-<form id="constraints" name="constraints">
-    Enter a b c <br/>
-    <input type="text" name="expression" id="expression" placeholder="Configuration"/>
-    <input type="number" name="amount" id="amount" placeholder="Amount"/>
-    <br/>
-    <input type="button" onclick="onClick()" id="submit" value="OK"/>
-    <br/>
-</form>
-<input type="button" onclick="send_exam()" id="save_exam" value="Save exam"/>
+<div id="new_exam_wrapper" style="float: left; margin-left: 10%;margin-top: 50px">
+    <label>
+        <input type="text" id="exam_title" placeholder="Exam title" style="margin-bottom: 30px; margin-top: 20px"/>
+        <input type="button" onclick="send_exam()" id="save_exam" value="Save exam" style="margin-right: 100px"/>
+    </label>
+    <form id="constraints" name="constraints">
+        Enter exercise template <br/>
+        <input type="text" name="expression" id="expression" placeholder="Configuration"/>
+        <input type="number" name="amount" id="amount" placeholder="Amount"/>
+        <br/>
+        <input type="button" onclick="onClick()" id="submit" value="OK"/>
+        <br/>
+    </form>
+</div>
 
-<div id="wrapper">
-    <table align="center" cellspacing="2" cellpadding="5" id="data_table" border="1">
+<div id="table_wrapper" style="float: right; margin-right: 35%; margin-top: 70px">
+    <table align="center" cellspacing="2" cellpadding="5" id="data_table" border="0">
         <tr>
             <th>#</th>
             <th>Configuration</th>
