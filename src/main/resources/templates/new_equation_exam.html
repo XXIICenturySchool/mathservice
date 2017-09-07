@@ -5,7 +5,6 @@
     <title>New equation exam template</title>
     <script type="text/javascript" th:src="@{/js/table_script.js}"></script>
     <script type="text/javascript" th:src="@{/js/equations_script.js}"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/base.js}"/>
 </head>
 
 <body>
@@ -16,7 +15,7 @@
     </label>
     <form id="constraints" name="constraints">
         Enter equation template with unknown variable x <br/>
-        <input type="text" name="expression" id="expression" placeholder="a*x+b"/>
+        <input type="text" name="template" id="template" placeholder="a*x+b"/>
         <input type="number" name="amount" id="amount" placeholder="Amount"/>
         <br/>
         <input type="button" onclick="onClick()" id="submit" value="OK"/>
@@ -28,7 +27,7 @@
     <table align="center" cellspacing="2" cellpadding="5" id="data_table" border="0">
         <tr>
             <th>#</th>
-            <th>Configuration</th>
+            <th>Template</th>
             <th>Amount</th>
         </tr>
 

@@ -5,16 +5,22 @@
     <title>Choose exam type</title>
     <script>
         function choose_type() {
+            if (document.getElementById('expressions').checked) {
+                window.location.href = window.location.href.replace("choose_exam_type", "new_exam")
+            }
 
+            if (document.getElementById('equations').checked) {
+                window.location.href = window.location.href.replace("choose_exam_type", "new_equation_exam")
+            }
         }
     </script>
 </head>
 <body>
 <form action="">
     <p><b>Choose your exam type</b></p>
-    <p><input name="type" type="radio" value="expressions" title="expressions"/> Expressions</p>
-    <p><input name="type" type="radio" value="equations" title="equations"/> Equations</p>
-    <p><input type="submit" value="Choose" onclick=""/></p>
+    <p><input name="choose" type="radio" id="expressions"/><label for="expressions"> Expressions</label></p>
+    <p><input name="choose" type="radio" id="equations"/><label for="equations"> Equations</label></p>
+    <p><input type="button" value="Choose" onclick="choose_type()"/></p>
 </form>
 </body>
 </html>
