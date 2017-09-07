@@ -5,20 +5,24 @@
 <head>
     <title>Exams</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script>
+        function newExam() {
+            window.location.href = window.location.href.replace("exams", "choose_exam_type");
+        }
+    </script>
 </head>
+
 <body>
-<a href="new_exam.html">Create new exam template</a>
+<input type="button" onclick="newExam()" title="New exam" value="New exam"/>
     <table>
         <thead>
         <tr>
-            <th>ID</th>
             <th>Title</th>
         </tr>
         </thead>
         <tbody>
         <!--/*@thymesVar id="examConfigurations" type="com.db.mathservice.data.ExamConfiguration"*/-->
         <tr th:each="examConfiguration : ${examConfigurations}">
-            <td th:text="${examConfiguration.id}">&nbsp;</td>
             <td th:text="${examConfiguration.title}">&nbsp;</td>
         </tr>
         </tbody>
