@@ -38,23 +38,7 @@ public class ArgumentSubstituterImpl implements ArgumentSubstituter {
                 .map(t -> t.tokenStr)
                 .collect(Collectors.joining()));
     }
-/*
-    @Override
-    public Expression substituteArguments(Expression expression, Map<String, Range> rangeMap, String ignoredVariable) {
-        List<Token> tokens = expression.getCopyOfInitialTokens();
-        tokens.stream()
-                .filter(t -> t.keyWord.isEmpty())
-                .filter(t -> t.looksLike.equals("argument"))
-                .filter(t -> !t.tokenStr.equals(ignoredVariable))
-                .forEach(t -> {
-                    Range range = rangeMap.get(t.tokenStr);
-                    t.tokenStr = Integer.valueOf(getNumberBetween(range.getMin(), range.getMax() + 1)).toString();
-                });
 
-        return new Expression(tokens.stream()
-                .map(t -> t.tokenStr)
-                .collect(Collectors.joining()));
-    }*/
     @Override
     public Expression substituteArguments(Expression expression, Map<String, Range> rangeMap, String ignoredVariable) {
         List<Token> tokens = expression.getCopyOfInitialTokens();

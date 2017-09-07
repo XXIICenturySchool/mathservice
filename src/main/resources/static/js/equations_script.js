@@ -50,17 +50,12 @@ function send_exam() {
     let examToSend = {};
     examToSend.title = document.getElementById("exam_title").value;
     examToSend.inputConfigurations = exam;
-    examToSend.type = "math.arithmetic";
+    examToSend.type = "math.equation";
     examToSend.teacherId = (new URL(window.location.href)).searchParams.get("teacherId");
 
     console.log(JSON.stringify(examToSend));
 
     xhr.send(JSON.stringify(examToSend));
-    xhr.onreadystatechange = function () {
-        if (this.readyState !== 4) {
-
-        }
-    }
 }
 
 function onSubmit() {

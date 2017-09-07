@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>New equation exam template</title>
+    <script type="text/javascript" th:src="@{/js/table_script.js}"></script>
+    <script type="text/javascript" th:src="@{/js/equations_script.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.js}"/>
+</head>
+
+<body>
+<div id="new_exam_wrapper" style="float: left; margin-left: 10%;margin-top: 50px">
+    <label>
+        <input type="text" id="exam_title" placeholder="Exam title" style="margin-bottom: 30px; margin-top: 20px"/>
+        <input type="button" onclick="send_exam()" id="save_exam" value="Save exam" style="margin-right: 100px"/>
+    </label>
+    <form id="constraints" name="constraints">
+        Enter equation template with unknown variable x <br/>
+        <input type="text" name="expression" id="expression" placeholder="a*x+b"/>
+        <input type="number" name="amount" id="amount" placeholder="Amount"/>
+        <br/>
+        <input type="button" onclick="onClick()" id="submit" value="OK"/>
+        <br/>
+    </form>
+</div>
+
+<div id="table_wrapper" style="float: right; margin-right: 35%; margin-top: 70px">
+    <table align="center" cellspacing="2" cellpadding="5" id="data_table" border="0">
+        <tr>
+            <th>#</th>
+            <th>Configuration</th>
+            <th>Amount</th>
+        </tr>
+
+    </table>
+</div>
+
+</body>
+</html>

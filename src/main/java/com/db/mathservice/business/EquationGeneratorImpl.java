@@ -6,6 +6,7 @@ import com.db.mathservice.data.Range;
 import com.db.mathservice.data.VariableConstraint;
 import org.mariuszgromada.math.mxparser.Expression;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Valentin on 07.09.2017.
  */
+@Service
 public class EquationGeneratorImpl implements EquationGenerator {
     private DigitsFiller digitsFiller;
     private ArgumentSubstituter argumentSubstituter;
@@ -44,10 +46,11 @@ public class EquationGeneratorImpl implements EquationGenerator {
             throw new IllegalStateException(expression.getErrorMessage());
         }
         Expression equationExpression = argumentSubstituter.substituteArguments(expression, rangeMap, "x");
-        String equationString = equationExpression.toString();
+        String equationString = equationExpression.getExpressionString();
         SubstitutionResult substitutionResult = argumentSubstituter.substituteArgument(equationExpression, "x", rangeMap.get("x"));
 
-        equationString += " = "+substitutionResult.getExpression().calculate();
+        equationString += " = " +
+                Integer.valueOf(Double.valueOf(substitutionResult.getExpression().calculate()).intValue()).toString();
         String answer = substitutionResult.getSubstitutedValue();
 
         return new Equation(equationString, answer);

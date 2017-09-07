@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ArithmeticArithmeticExerciseGeneratorImplTest {
+public class ArithmeticExerciseGeneratorImplTest {
     @Autowired
     ArithmeticExerciseGeneratorImpl exerciseGeneratorImpl;
     @Test
