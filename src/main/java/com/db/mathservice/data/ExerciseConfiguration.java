@@ -1,17 +1,16 @@
 package com.db.mathservice.data;
 
-import com.db.mathservice.data.Range;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.Map;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public final class ExerciseConfiguration {
-    private String format;
-    @Singular
-    private Map<String, Range> ranges;
+public class ExerciseConfiguration {
+    private String template;
+    private int amount;
+    private List<VariableConstraint> variables;
 }

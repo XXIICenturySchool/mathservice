@@ -19,6 +19,7 @@ public class ExpressionArgumentExtractController {
                 .filter(t -> t.keyWord.isEmpty())
                 .filter(t -> t.looksLike.equals("argument"))
                 .map(t -> t.tokenStr)
+                .distinct()
                 .collect(Collectors.toList());
     }
 }
