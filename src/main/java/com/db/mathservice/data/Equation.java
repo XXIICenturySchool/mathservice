@@ -1,7 +1,14 @@
 package com.db.mathservice.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Equation extends Exercise {
     public Equation(String question, String answer) {
-        super("math.equation", question, answer);
+        List<String> a = new ArrayList<>();
+        a.add(answer);
+        this.type = "math.arithmetic";
+        this.question = question;
+        this.answer = a;
     }
 }

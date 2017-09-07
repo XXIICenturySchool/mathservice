@@ -4,7 +4,22 @@
     <meta charset="UTF-8"/>
     <title>New exam template</title>
     <script type="text/javascript" th:src="@{/js/table_script.js}"></script>
-    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+    <script>
+        function send_exam() {
+            xhr.open("POST", "/save_exam", true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            let examToSend = {};
+            examToSend.title = document.getElementById("exam_title").value;
+            examToSend.exerciseConfigurations = exam;
+            examToSend.type = "math.simple_arithmetic";
+            examToSend.teacherId = (new URL(window.location.href)).searchParams.get("teacherId");
+
+            console.log(JSON.stringify(examToSend));
+
+            xhr.send(JSON.stringify(examToSend));
+            window.location.href = window.location.href.replace("new_simple_exam", "exam_templates");
+        }
+    </script>
 </head>
 
 <body>
@@ -15,7 +30,7 @@
     </label>
     <form id="constraints" name="constraints">
 
-        <p><b>a+b</b></p> <br/>
+        <p><b>a+b</b></p><br/>
         <input type="text" name="template" id="template" placeholder="Configuration"/>
         <input type="number" name="amount" id="amount" placeholder="Amount"/>
         <br/>
