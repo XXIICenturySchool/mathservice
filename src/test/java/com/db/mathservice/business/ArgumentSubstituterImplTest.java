@@ -1,4 +1,4 @@
-package com.db.mathservice;
+package com.db.mathservice.business;
 
 import com.db.mathservice.business.ArgumentSubstituterImpl;
 import com.db.mathservice.data.Range;

@@ -1,4 +1,4 @@
-package com.db.mathservice;
+package com.db.mathservice.business;
 
 import com.db.mathservice.business.EquationGeneratorImpl;
 import com.db.mathservice.data.Equation;

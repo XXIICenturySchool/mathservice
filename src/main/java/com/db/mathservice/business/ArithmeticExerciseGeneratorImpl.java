@@ -15,15 +15,18 @@ import java.util.stream.Collectors;
 public class ArithmeticExerciseGeneratorImpl implements ExerciseGenerator {
     private DigitsFiller digitsFiller;
     private ArgumentSubstituter argumentSubstituter;
+    private TemplatePreprocessor preprocessor;
 
     public ArithmeticExerciseGeneratorImpl(DigitsFiller digitsFiller) {
         this.digitsFiller = digitsFiller;
     }
 
     @Autowired
-    public ArithmeticExerciseGeneratorImpl(DigitsFiller digitsFiller, ArgumentSubstituter argumentSubstituter) {
+    public ArithmeticExerciseGeneratorImpl(DigitsFiller digitsFiller, ArgumentSubstituter argumentSubstituter,
+                                           TemplatePreprocessor preprocessor) {
         this.digitsFiller = digitsFiller;
         this.argumentSubstituter = argumentSubstituter;
+        this.preprocessor = preprocessor;
     }
 
     public ArithmeticExerciseGeneratorImpl(ArgumentSubstituter argumentSubstituter) {
@@ -37,6 +40,7 @@ public class ArithmeticExerciseGeneratorImpl implements ExerciseGenerator {
                 .collect(Collectors.toMap(VariableConstraint::getVarName, o -> new Range(o.getFrom(), o.getTo())));
         template = digitsFiller.fillStringWithMissingDigits(template);
 
+        template = preprocessor.process(template);
         Expression expression = new Expression(template);
         if (!expression.checkLexSyntax()) {
             throw new IllegalStateException(expression.getErrorMessage());
