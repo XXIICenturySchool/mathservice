@@ -5,24 +5,27 @@
     <title>New exam template</title>
     <script type="text/javascript" th:src="@{/js/table_script.js}"></script>
     <script type="text/javascript" th:src="@{/js/script.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.js}"/>
 </head>
 
 <body>
-<label>
-    <input type="text" id="exam_title" placeholder="Enter exam title"/>
-</label>
-<form id="constraints" name="constraints">
-    Enter a b c <br/>
-    <input type="text" name="expression" id="expression" placeholder="Configuration"/>
-    <input type="number" name="amount" id="amount" placeholder="Amount"/>
-    <br/>
-    <input type="button" onclick="onClick()" id="submit" value="OK"/>
-    <br/>
-</form>
-<input type="button" onclick="send_exam()" id="save_exam" value="Save exam"/>
+<div id="new_exam_wrapper" style="float: left; margin-left: 10%;margin-top: 50px">
+    <label>
+        <input type="text" id="exam_title" placeholder="Exam title" style="margin-bottom: 30px; margin-top: 20px"/>
+        <input type="button" onclick="send_exam()" id="save_exam" value="Save exam" style="margin-right: 100px"/>
+    </label>
+    <form id="constraints" name="constraints">
+        Enter exercise template <br/>
+        <input type="text" name="expression" id="expression" placeholder="Configuration"/>
+        <input type="number" name="amount" id="amount" placeholder="Amount"/>
+        <br/>
+        <input type="button" onclick="onClick()" id="submit" value="OK"/>
+        <br/>
+    </form>
+</div>
 
-<div id="wrapper">
-    <table align="center" cellspacing="2" cellpadding="5" id="data_table" border="1">
+<div id="table_wrapper" style="float: right; margin-right: 35%; margin-top: 70px">
+    <table align="center" cellspacing="2" cellpadding="5" id="data_table" border="0">
         <tr>
             <th>#</th>
             <th>Configuration</th>
