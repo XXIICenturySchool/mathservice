@@ -1,6 +1,7 @@
 package com.db.mathservice.data;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -14,7 +15,7 @@ public class ExamConfiguration {
     @Id
     private String id;
     private String title;
-    private int teacherId;
+    private String teacherId;
     private String type;
-    private List<ExerciseConfiguration> inputConfigurations;
+    private List<ExerciseConfiguration> exerciseConfigurations;
 }

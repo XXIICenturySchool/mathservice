@@ -16,10 +16,10 @@ import java.util.List;
 public class ExamTemplatesController {
     ExamConfigurationRepository repository;
 
-    @RequestMapping("/exams")
-    public String templates(@RequestParam(value="teacherId") int teacherId, Model model) {
+    @RequestMapping("/exam_templates")
+    public String templates(@RequestParam(value="teacherId") String teacherId, Model model) {
         List<ExamConfiguration> examConfigurations = repository.findByTeacherId(teacherId);
         model.addAttribute("examConfigurations", examConfigurations);
-        return "exams";
+        return "exam_templates";
     }
 }

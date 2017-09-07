@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 /**
  * Created by Valentin on 07.09.2017.
  */
-@Service
-public class EquationGeneratorImpl implements EquationGenerator {
+@Service("math.equation")
+public class EquationGeneratorImpl implements ExerciseGenerator {
     private DigitsFiller digitsFiller;
     private ArgumentSubstituter argumentSubstituter;
 
@@ -35,7 +35,7 @@ public class EquationGeneratorImpl implements EquationGenerator {
     }
 
     @Override
-    public Equation generateEquation(ExerciseConfiguration exerciseConfiguration) {
+    public Equation generateExercise(ExerciseConfiguration exerciseConfiguration) {
         String template = exerciseConfiguration.getTemplate();
         Map<String, Range> rangeMap = exerciseConfiguration.getVariables().stream()
                 .collect(Collectors.toMap(VariableConstraint::getVarName, o -> new Range(o.getFrom(), o.getTo())));

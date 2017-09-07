@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Service
-public class ArithmeticExerciseGeneratorImpl implements ArithmeticExerciseGenerator {
+@Service("math.arithmetic")
+public class ArithmeticExerciseGeneratorImpl implements ExerciseGenerator {
     private DigitsFiller digitsFiller;
     private ArgumentSubstituter argumentSubstituter;
 
@@ -31,7 +31,7 @@ public class ArithmeticExerciseGeneratorImpl implements ArithmeticExerciseGenera
     }
 
     @Override
-    public ArithmeticExercise generateArithmeticExercise(ExerciseConfiguration exerciseConfiguration) {
+    public ArithmeticExercise generateExercise(ExerciseConfiguration exerciseConfiguration) {
         String template = exerciseConfiguration.getTemplate();
         Map<String, Range> rangeMap = exerciseConfiguration.getVariables().stream()
                 .collect(Collectors.toMap(VariableConstraint::getVarName, o -> new Range(o.getFrom(), o.getTo())));

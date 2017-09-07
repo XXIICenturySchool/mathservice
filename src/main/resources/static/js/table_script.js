@@ -5,13 +5,13 @@ function draw_table() {
 
     table.insertRow().outerHTML = "    <tr>\n" +
         "        <th>#</th>\n" +
-        "        <th>Configuration</th>\n" +
+        "        <th>Template</th>\n" +
         "        <th>Amount</th>\n" +
         "    </tr>";
 
     for (let i = 0; i < exam.length; i++) {
         const new_number = i + 1;
-        const new_conf = exam[i].expression;
+        const new_conf = exam[i].template;
         const new_count = exam[i].amount;
 
         table.insertRow(new_number).outerHTML = "<tr id='row" + new_number +

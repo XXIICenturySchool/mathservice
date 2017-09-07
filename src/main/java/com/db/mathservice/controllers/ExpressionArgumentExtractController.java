@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @RestController
 public class ExpressionArgumentExtractController {
     @RequestMapping("/parse_expression")
-    public List<String> parseException(@RequestParam(value = "expression") String expressionString) {
+    public List<String> parseException(@RequestParam(value = "template") String expressionString) {
         List<Token> tokens = new Expression(expressionString).getCopyOfInitialTokens();
 
         return tokens.stream()

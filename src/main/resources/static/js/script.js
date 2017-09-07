@@ -56,11 +56,7 @@ function send_exam() {
     console.log(JSON.stringify(examToSend));
 
     xhr.send(JSON.stringify(examToSend));
-    xhr.onreadystatechange = function () {
-        if (this.readyState !== 4) {
-
-        }
-    }
+    window.location.href = window.location.href.replace("new_exam", "exam_templates");
 }
 
 function onSubmit() {
@@ -80,7 +76,7 @@ function onSubmit() {
             newExerciseConfiguration.variables.push(newVariable);
             newVariable = {};
         }
-        if (pair[0] === "expression") {
+        if (pair[0] === "template") {
             newExerciseConfiguration[pair[0]] = pair[1];
         }
         if (pair[0] === "amount") {

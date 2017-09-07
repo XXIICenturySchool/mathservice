@@ -26,15 +26,15 @@ public class EquationGeneratorImplTest {
         List<VariableConstraint> constraints = new ArrayList<>();
         constraints.add(new VariableConstraint("x", 2, 2));
 
-        Equation equation = equationGenerator.generateEquation(
+        Equation equation = equationGenerator.generateExercise(
                 new ExerciseConfiguration("x+3", 1, constraints));
         Assert.assertEquals(new Equation("x+3 = 5", "2"), equation);
 
-        equation = equationGenerator.generateEquation(
+        equation = equationGenerator.generateExercise(
                 new ExerciseConfiguration("x*3+1", 1, constraints));
         Assert.assertEquals(new Equation("x*3+1 = 7", "2"), equation);
 
-        equation = equationGenerator.generateEquation(
+        equation = equationGenerator.generateExercise(
                 new ExerciseConfiguration("x-5", 1, constraints));
         Assert.assertEquals(new Equation("x-5 = -3", "2"), equation);
 
