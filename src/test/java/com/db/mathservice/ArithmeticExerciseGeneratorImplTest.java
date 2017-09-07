@@ -32,7 +32,7 @@ public class ArithmeticExerciseGeneratorImplTest {
     public void exerciseWithoutSymbolsCalculatesRight() throws Exception {
 
         ArithmeticExercise arithmeticExercise =
-                exerciseGeneratorImpl.generateArithmeticExercise(new ExerciseConfiguration("3+2", 0,  new ArrayList<>()));
+                exerciseGeneratorImpl.generateExercise(new ExerciseConfiguration("3+2", 0,  new ArrayList<>()));
 
         Assert.assertEquals(arithmeticExercise, new ArithmeticExercise("3+2", "5"));
     }
@@ -44,14 +44,14 @@ public class ArithmeticExerciseGeneratorImplTest {
 
         ArithmeticExerciseGeneratorImpl exerciseGenerator = new ArithmeticExerciseGeneratorImpl(mock);
 
-        exerciseGenerator.generateArithmeticExercise(new ExerciseConfiguration("", 0, new ArrayList<>()));
+        exerciseGenerator.generateExercise(new ExerciseConfiguration("", 0, new ArrayList<>()));
     }
 
     @Test
     public void exerciseWithOneUnknownGeneratesAndCalculatesRight() throws Exception {
         List<VariableConstraint> constraints = new ArrayList<>();
         constraints.add(new VariableConstraint("a", 1, 1));
-        ArithmeticExercise arithmeticExercise = exerciseGeneratorImpl.generateArithmeticExercise(
+        ArithmeticExercise arithmeticExercise = exerciseGeneratorImpl.generateExercise(
                 new ExerciseConfiguration("a+3", 1, constraints));
 
         Assert.assertEquals(arithmeticExercise, new ArithmeticExercise("1+3", "4"));

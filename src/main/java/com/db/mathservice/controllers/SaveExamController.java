@@ -16,10 +16,11 @@ public class SaveExamController {
     ExamConfigurationRepository repository;
 
     @PostMapping("/save_exam")
-    public String addExam(@RequestBody ExamConfiguration inputConfiguration) {
-        repository.save(inputConfiguration);
+    public ExamCoordinates addExam(@RequestBody ExamConfiguration inputConfiguration) {
+        String id = repository.save(inputConfiguration).getId();
         //TODO register exam
-        return "exams";
+        return ExamCoordinates.builder().teacherId(inputConfiguration.getTeacherId())
+                .url("/exams?localExamId=" + id).build();
     }
 
 }
