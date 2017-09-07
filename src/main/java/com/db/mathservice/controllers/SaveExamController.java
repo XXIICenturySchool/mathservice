@@ -41,7 +41,7 @@ public class SaveExamController {
 
         String globalId = registerExam(examCoordinates);
 
-
+        localGlobalExamIdRelationRepository.save(new LocalGlobalExamIdRelation(localId, globalId));
 
         return examCoordinates;
     }
