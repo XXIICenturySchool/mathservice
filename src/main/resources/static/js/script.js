@@ -10,11 +10,10 @@ function send_exam() {
     console.log(JSON.stringify(examToSend));
 
     xhr.send(JSON.stringify(examToSend));
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-            window.location.href = window.location.href.replace("new_exam", "exam_templates");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            window.location.href = window.location.href.replace("new_exam?", "?");
         } else {
-            window.alert("Internal error")
         }
     };
 }

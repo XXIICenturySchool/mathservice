@@ -15,7 +15,7 @@ import java.util.List;
 public class ExamTemplatesController {
     ExamConfigurationsLoader examConfigurationsLoader;
 
-    @RequestMapping("/exam_templates")
+    @RequestMapping("/")
     public String templates(@RequestParam(value="teacherId") String teacherId, Model model) {
         List<ExamConfigurationWithGlobalId> examConfigurationsWithGlobalId =
                 examConfigurationsLoader.loadConfigurationsWithGlobalId(teacherId);
