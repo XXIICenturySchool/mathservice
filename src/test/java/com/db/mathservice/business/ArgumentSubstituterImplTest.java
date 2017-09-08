@@ -1,4 +1,4 @@
-package com.db.mathservice;
+package com.db.mathservice.business;
 
 import com.db.mathservice.business.ArgumentSubstituterImpl;
 import com.db.mathservice.data.Range;
@@ -19,6 +19,17 @@ import static org.junit.Assert.*;
 public class ArgumentSubstituterImplTest {
     @Autowired
     ArgumentSubstituterImpl argumentSubstitutorImpl;
+
+    @Test
+    public void tempTest() throws Exception {
+        Map<String, Range> rangeMap = new HashMap<>();
+        rangeMap.put("a", new Range(2, 2));
+        rangeMap.put("b", new Range(3, 3));
+        rangeMap.put("c", new Range(4, 4));
+        Expression expression = argumentSubstitutorImpl
+                .substituteArguments(new Expression("<c + <a*b>>/b"), rangeMap);
+        assertEquals("10/3", expression.getExpressionString());
+    }
 
     @Test
     public void expressionWithNoArgumentsDoesNotSubstitute() throws Exception {
