@@ -4,38 +4,55 @@
     <meta charset="UTF-8"/>
     <title>New exam template</title>
     <script type="text/javascript" th:src="@{/js/table_script.js}"></script>
-    <script>
-        function send_exam() {
-            xhr.open("POST", "/save_exam", true);
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            let examToSend = {};
-            examToSend.title = document.getElementById("exam_title").value;
-            examToSend.exerciseConfigurations = exam;
-            examToSend.type = "math.simple_arithmetic";
-            examToSend.teacherId = (new URL(window.location.href)).searchParams.get("teacherId");
-
-            console.log(JSON.stringify(examToSend));
-
-            xhr.send(JSON.stringify(examToSend));
-            window.location.href = window.location.href.replace("new_simple_exam", "exam_templates");
-        }
-    </script>
+    <script type="text/javascript" th:src="@{/js/simple_expressions_script.js}"></script>
 </head>
 
 <body>
-<div id="new_exam_wrapper" style="float: left; margin-left: 10%;margin-top: 50px">
+<div id="new-exam-wrapper" style="float: left; margin-left: 10%;margin-top: 50px">
     <label>
-        <input type="text" id="exam_title" placeholder="Exam title" style="margin-bottom: 30px; margin-top: 20px"/>
-        <input type="button" onclick="send_exam()" id="save_exam" value="Save exam" style="margin-right: 100px"/>
+        <input type="text" id="exam-title" placeholder="Exam title" style="margin-bottom: 30px; margin-top: 20px"/>
+        <input type="button" onclick="send_exam()" id="save-exam" value="Save exam" style="margin-right: 100px"/>
     </label>
-    <form id="constraints" name="constraints">
-
-        <p><b>a+b</b></p><br/>
-        <input type="text" name="template" id="template" placeholder="Configuration"/>
-        <input type="number" name="amount" id="amount" placeholder="Amount"/>
+    <form id="form1" name="constraints">
+        <br/><b>a+b</b> <br/>
+        <input type="number" name="amount" id="plus-amount" placeholder="Amount"/>
         <br/>
-        <input type="button" onclick="onClick()" id="submit" value="OK"/>
+        <div id="plus-constraints-configuration">a from <input type="number" name="a.from"/>
+            to <input type="number" name="a.to"/><br/>b
+            from
+            <input type="number" name="b.from"/>
+            to <input type="number" name="b.to"/><br/>
+        </div>
+    </form>
+    <form id="form2" name="constraints">
+        <br/><b>a-b</b> <br/>
+        <input type="number" name="amount" id="minus-amount" placeholder="Amount"/>
         <br/>
+        <div id="minus-constraints-configuration">a from <input type="number" name="a.from"/> to
+            <input type="number" name="a.to"/><br/>b
+            from
+            <input type="number" name="b.from"/>
+            to <input type="number" name="b.to"/><br/></div>
+    </form>
+    <form id="form3" name="constraints">
+        <br/><b>a*b</b> <br/>
+        <input type="number" name="amount" id="multiply-amount" placeholder="Amount"/>
+        <br/>
+        <div id="multiply-constraints-configuration">a from <input type="number" name="a.from"/> to
+            <input type="number" name="a.to"/><br/>b
+            from
+            <input type="number" name="b.from"/>
+            to <input type="number" name="b.to"/><br/></div>
+    </form>
+    <form id="form4" name="constraints">
+        <br/><b>a/b</b> <br/>
+        <input type="number" name="amount" id="divide-amount" placeholder="Amount"/>
+        <br/>
+        <div id="divide-constraints-configuration">a from <input type="number" name="a.from"/> to
+            <input type="number" name="a.to"/><br/>b
+            from
+            <input type="number" name="b.from"/>
+            to <input type="number" name="b.to"/><br/></div>
     </form>
 </div>
 

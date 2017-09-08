@@ -49,9 +49,7 @@ function addFieldsToForm(args) {
     }
 }
 
-function onSubmit() {
-    let form = document.getElementById("constraints");
-    let formData = new FormData(form);
+function addToExam(formData) {
     let newExerciseConfiguration = {};
     newExerciseConfiguration.variables = [];
     let newVariable = {};
@@ -74,6 +72,12 @@ function onSubmit() {
         }
     }
     exam.push(newExerciseConfiguration);
+}
+
+function onSubmit() {
+    let form = document.getElementById("constraints");
+    let formData = new FormData(form);
+    addToExam(formData);
     draw_table();
 
     form.removeChild(document.getElementById("constraints-configuration"));
