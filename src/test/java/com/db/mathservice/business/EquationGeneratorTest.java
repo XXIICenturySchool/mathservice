@@ -1,6 +1,5 @@
 package com.db.mathservice.business;
 
-import com.db.mathservice.business.EquationGeneratorImpl;
 import com.db.mathservice.data.Equation;
 import com.db.mathservice.data.ExerciseConfiguration;
 import com.db.mathservice.data.VariableConstraint;
@@ -17,9 +16,9 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class EquationGeneratorImplTest {
+public class EquationGeneratorTest {
     @Autowired
-    EquationGeneratorImpl equationGenerator;
+    EquationGenerator equationGenerator;
 
     @Test
     public void equationGeneratesRight() throws Exception {

@@ -1,6 +1,5 @@
 package com.db.mathservice.dao;
 
-import com.db.mathservice.data.ExamConfiguration;
 import com.db.mathservice.data.LocalGlobalExamIdRelation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

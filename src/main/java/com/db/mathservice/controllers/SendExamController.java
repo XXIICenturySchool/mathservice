@@ -5,9 +5,9 @@ import com.db.mathservice.dao.ExamConfigurationRepository;
 import com.db.mathservice.dao.ExamRepository;
 import com.db.mathservice.data.Exam;
 import com.db.mathservice.data.ExamConfiguration;
+import com.db.mathservice.data.ExamToSend;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,10 +19,11 @@ public class SendExamController {
     private ExamGenerator examGenerator;
 
     @GetMapping("/exams")
-    private Exam sendExam(@RequestParam(value = "localExamId") String localExamId) {
+    private ExamToSend sendExam(@RequestParam(value = "localExamId") String localExamId) {
         ExamConfiguration examConfiguration = configurationRepository.findById(localExamId);
         Exam exam = examGenerator.generateExam(examConfiguration);
         examRepository.save(exam);
-        return exam;
+        return ExamToSend.builder().tasks(exam.getTasks())
+                .teacherId(exam.getTeacherId()).build();
     }
 }

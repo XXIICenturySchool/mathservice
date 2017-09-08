@@ -2,7 +2,7 @@ function send_exam() {
     xhr.open("POST", "/save_exam", true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     let examToSend = {};
-    examToSend.title = document.getElementById("exam_title").value;
+    examToSend.title = document.getElementById("exam-title").value;
     examToSend.exerciseConfigurations = exam;
     examToSend.type = "math.arithmetic";
     examToSend.teacherId = (new URL(window.location.href)).searchParams.get("teacherId");
@@ -10,5 +10,11 @@ function send_exam() {
     console.log(JSON.stringify(examToSend));
 
     xhr.send(JSON.stringify(examToSend));
-    window.location.href = window.location.href.replace("new_exam", "exam_templates");
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            window.location.href = window.location.href.replace("new_exam", "exam_templates");
+        } else {
+            window.alert("Internal error")
+        }
+    };
 }

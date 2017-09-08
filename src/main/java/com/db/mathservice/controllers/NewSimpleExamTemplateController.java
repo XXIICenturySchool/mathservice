@@ -6,12 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class GreetingController {
-
-    @RequestMapping("/greeting")
-    public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "greeting";
+public class NewSimpleExamTemplateController {
+    @RequestMapping("/new_simple_exam")
+    public String newSimpleExam(@RequestParam(value="teacherId") int teacherId, Model model) {
+        return "new_simple_exam";
     }
 
 }

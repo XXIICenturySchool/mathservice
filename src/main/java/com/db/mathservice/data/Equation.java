@@ -7,7 +7,6 @@ public class Equation extends Exercise {
     public Equation(String question, String answer) {
         List<String> a = new ArrayList<>();
         a.add(answer);
-        this.type = "math.arithmetic";
         this.question = question;
         this.answer = a;
     }

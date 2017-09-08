@@ -22,31 +22,36 @@ function addFieldsToForm(args) {
     form.appendChild(divConfigs);
     let inputFrom;
     let inputTo;
-    JSON.parse(args).forEach(function (arg) {
+    let argsArray = JSON.parse(args);
+    argsArray.forEach(function (arg) {
         divConfigs.appendChild(document.createTextNode(arg + " from "));
         inputFrom = document.createElement("input");
         inputFrom.type = "number";
+        inputFrom.value = "1";
         inputFrom.name = arg + ".from";
         divConfigs.appendChild(inputFrom);
 
         divConfigs.appendChild(document.createTextNode(" to "));
         inputTo = document.createElement("input");
         inputTo.type = "number";
+        inputTo.value = "10";
         inputTo.name = arg + ".to";
         divConfigs.appendChild(inputTo);
         divConfigs.appendChild(document.createElement("br"));
     });
 
-    const button = document.createElement("input");
-    button.type = "button";
-    button.value = "Submit";
-    button.onclick = onSubmit;
-    divConfigs.appendChild(button);
+    if (argsArray && argsArray.length > 0) {
+        const button = document.createElement("input");
+        button.type = "button";
+        button.value = "Submit";
+        button.onclick = onSubmit;
+        divConfigs.appendChild(button);
+    } else {
+        onSubmit();
+    }
 }
 
-function onSubmit() {
-    let form = document.getElementById("constraints");
-    let formData = new FormData(form);
+function addToExam(formData) {
     let newExerciseConfiguration = {};
     newExerciseConfiguration.variables = [];
     let newVariable = {};
@@ -69,6 +74,12 @@ function onSubmit() {
         }
     }
     exam.push(newExerciseConfiguration);
+}
+
+function onSubmit() {
+    let form = document.getElementById("constraints");
+    let formData = new FormData(form);
+    addToExam(formData);
     draw_table();
 
     form.removeChild(document.getElementById("constraints-configuration"));
@@ -87,8 +98,10 @@ function draw_table() {
 
     for (let i = 0; i < exam.length; i++) {
         const new_number = i + 1;
-        const new_conf = exam[i].template;
+        let new_conf = exam[i].template;
         const new_count = exam[i].amount;
+        new_conf = new_conf.replace("<", "&lt;");
+        new_conf = new_conf.replace(">", "&gt;");
 
         table.insertRow(new_number).outerHTML = "<tr id='row" + new_number +
             "'><td id='number_row" + new_number + "'>" +

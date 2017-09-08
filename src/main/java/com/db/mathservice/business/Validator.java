@@ -4,6 +4,6 @@ import com.db.mathservice.data.ExerciseConfiguration;
 
 public interface Validator {
 
-    public boolean validate(ExerciseConfiguration configuration);
+    boolean validate(ExerciseConfiguration configuration);
 
 }

@@ -2,7 +2,6 @@ package com.db.mathservice.dao;
 
 import com.db.mathservice.data.ExamConfiguration;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
 
