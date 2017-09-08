@@ -1,5 +1,6 @@
-package com.db.mathservice.business;
+package com.db.mathservice.utility;
 
+import com.db.mathservice.utility.TriangleBracketsPreprocessor;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

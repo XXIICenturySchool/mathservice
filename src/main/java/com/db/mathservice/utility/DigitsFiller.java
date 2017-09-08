@@ -1,4 +1,4 @@
-package com.db.mathservice.business;
+package com.db.mathservice.utility;
 
 public interface DigitsFiller {
     int RADIX = 10;

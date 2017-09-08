@@ -1,11 +1,10 @@
-package com.db.mathservice.business;
+package com.db.mathservice.utility;
 
 import com.db.mathservice.data.Range;
-import lombok.RequiredArgsConstructor;
 import org.mariuszgromada.math.mxparser.Expression;
 import org.mariuszgromada.math.mxparser.parsertokens.Token;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -13,14 +12,13 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service
-@RequiredArgsConstructor
-public class ArgumentSubstituterWithValidation {
+@Component
+public class ArgumentSubstituterImpl implements ArgumentSubstituter {
     private final Random random = new Random(System.currentTimeMillis());
     private TemplatePreprocessor preprocessor;
 
     @Autowired
-    public ArgumentSubstituterWithValidation(TemplatePreprocessor preprocessor) {
+    public ArgumentSubstituterImpl(TemplatePreprocessor preprocessor) {
         this.preprocessor = preprocessor;
     }
 
@@ -32,23 +30,40 @@ public class ArgumentSubstituterWithValidation {
         }
     }
 
+    @Override
     public Expression substituteArguments(Expression expression, Map<String, Range> rangeMap) {
         List<Token> tokens = expression.getCopyOfInitialTokens();
         Set<String> arguments = getArguments(tokens);
         Map<String, String> argumentsRandomValuesMap = generateRandomValues(arguments, rangeMap);
-
-        swapIfMinusExpressionReturnsNegative(tokens, argumentsRandomValuesMap);
-
         return generateExpressionWithRandomValues(tokens, argumentsRandomValuesMap);
     }
 
-    private void swapIfMinusExpressionReturnsNegative(List<Token> tokens, Map<String, String> argumentsRandomValuesMap) {
-        if (tokens.get(1).tokenStr.equals("-") &&
-                Integer.parseInt(argumentsRandomValuesMap.get("a")) > Integer.parseInt(argumentsRandomValuesMap.get("b"))) {
-            String swap = argumentsRandomValuesMap.get("a");
-            argumentsRandomValuesMap.replace("a", argumentsRandomValuesMap.get("b"));
-            argumentsRandomValuesMap.replace("b", swap);
+    @Override
+    public Expression substituteArguments(Expression expression, Map<String, Range> rangeMap, String ignoredVariable) {
+        List<Token> tokens = expression.getCopyOfInitialTokens();
+        Set<String> arguments = getArguments(tokens);
+        arguments = ignoreVariable(arguments, ignoredVariable);
+        Map<String, String> argumentsRandomValuesMap = generateRandomValues(arguments, rangeMap);
+        return generateExpressionWithRandomValues(tokens, argumentsRandomValuesMap);
+    }
+
+    @Override
+    public SubstitutionResult substituteArgument(Expression expression, String variable, Range range) {
+        String randomValue = Integer.valueOf(getNumberBetween(range.getMin(), range.getMax() + 1)).toString();
+
+        List<Token> tokens = expression.getCopyOfInitialTokens();
+        Set<String> arguments = getArguments(tokens);
+
+        tokens.stream()
+                .filter(t -> t.tokenStr.equals(variable))
+                .forEach(t -> t.tokenStr = randomValue);
+
+        String expressionString = tokens.stream().map(token -> token.tokenStr).collect(Collectors.joining());
+        if (arguments.size() == 1) {
+            expressionString = preprocessor.process(expressionString);
         }
+
+        return new SubstitutionResult(new Expression(expressionString), randomValue);
     }
 
     private Expression generateExpressionWithRandomValues(List<Token> tokens, Map<String, String> argumentsRandomValuesMap) {
@@ -66,6 +81,11 @@ public class ArgumentSubstituterWithValidation {
                 .collect(Collectors.toMap(t -> t,
                         t -> Integer.valueOf(getNumberBetween(rangeMap.get(t).getMin(), rangeMap.get(t).getMax() + 1))
                                 .toString()));
+    }
+
+    private Set<String> ignoreVariable(Set<String> arguments, String ignoredVariable) {
+        return arguments.stream()
+                .filter(arg -> !arg.equals(ignoredVariable)).collect(Collectors.toSet());
     }
 
     private Set<String> getArguments(List<Token> tokens) {

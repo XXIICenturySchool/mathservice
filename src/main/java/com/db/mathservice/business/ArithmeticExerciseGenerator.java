@@ -4,6 +4,8 @@ import com.db.mathservice.data.ArithmeticExercise;
 import com.db.mathservice.data.ExerciseConfiguration;
 import com.db.mathservice.data.Range;
 import com.db.mathservice.data.VariableConstraint;
+import com.db.mathservice.utility.ArgumentSubstituter;
+import com.db.mathservice.utility.DigitsFiller;
 import org.mariuszgromada.math.mxparser.Expression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

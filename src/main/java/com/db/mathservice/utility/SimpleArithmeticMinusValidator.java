@@ -1,4 +1,4 @@
-package com.db.mathservice.business;
+package com.db.mathservice.utility;
 
 import com.db.mathservice.data.ExerciseConfiguration;
 import com.db.mathservice.data.VariableConstraint;

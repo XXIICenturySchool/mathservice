@@ -1,4 +1,4 @@
-package com.db.mathservice.business;
+package com.db.mathservice.utility;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

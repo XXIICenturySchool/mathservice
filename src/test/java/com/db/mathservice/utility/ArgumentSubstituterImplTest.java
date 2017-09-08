@@ -1,6 +1,6 @@
-package com.db.mathservice.business;
+package com.db.mathservice.utility;
 
-import com.db.mathservice.business.ArgumentSubstituterImpl;
+import com.db.mathservice.utility.ArgumentSubstituterImpl;
 import com.db.mathservice.data.Range;
 import org.junit.Test;
 import org.junit.runner.RunWith;
