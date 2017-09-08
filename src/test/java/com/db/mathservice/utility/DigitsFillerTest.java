@@ -1,6 +1,6 @@
-package com.db.mathservice.business;
+package com.db.mathservice.utility;
 
-import com.db.mathservice.business.DigitsFiller;
+import com.db.mathservice.utility.DigitsFiller;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

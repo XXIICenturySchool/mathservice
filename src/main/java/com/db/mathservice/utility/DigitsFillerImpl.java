@@ -1,4 +1,4 @@
-package com.db.mathservice.business;
+package com.db.mathservice.utility;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;

@@ -3,6 +3,7 @@ package com.db.mathservice.business;
 import com.db.mathservice.data.ExerciseConfiguration;
 import com.db.mathservice.data.ArithmeticExercise;
 import com.db.mathservice.data.VariableConstraint;
+import com.db.mathservice.utility.DigitsFiller;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

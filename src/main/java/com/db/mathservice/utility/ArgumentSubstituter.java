@@ -1,4 +1,4 @@
-package com.db.mathservice.business;
+package com.db.mathservice.utility;
 
 import com.db.mathservice.data.Range;
 import org.mariuszgromada.math.mxparser.Expression;

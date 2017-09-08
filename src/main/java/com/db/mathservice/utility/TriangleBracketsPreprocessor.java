@@ -1,4 +1,4 @@
-package com.db.mathservice.business;
+package com.db.mathservice.utility;
 
 import org.mariuszgromada.math.mxparser.Expression;
 import org.springframework.stereotype.Service;
