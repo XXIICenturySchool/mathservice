@@ -16,5 +16,4 @@ public abstract class Exercise {
     protected String type;
     protected String question;
     protected List<String> answer;
-    protected List<String> options;
 }

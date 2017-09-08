@@ -21,7 +21,6 @@ public class ExamRegistrarImpl implements ExamRegistrar {
     @SneakyThrows
     public String registerExam(ExamCoordinates examCoordinates) {
         ServiceInstance serviceInstance = Services.MAPLOGIN.pickRandomInstance(discoveryClient);
-        System.out.println("URI "+serviceInstance.getUri());
         URL url = serviceInstance.getUri().toURL();
         url = new URL(url.toString()+"/exams/saveExam");
         RestTemplate restTemplate = new RestTemplate();
