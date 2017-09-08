@@ -30,7 +30,7 @@
         <tr th:each="examConfigurationWithGlobalId : ${examConfigurationsWithGlobalId}">
             <td th:text="${examConfigurationWithGlobalId.globalId}">&nbsp;</td>
             <td th:text="${examConfigurationWithGlobalId.examConfiguration.title}">&nbsp;</td>
-            <!--<td><input type="button" onclick="editExam()"/></td>-->
+            <td><input type="button" onclick="editExam()"/></td>
         </tr>
         </tbody>
     </table>

@@ -1,7 +1,6 @@
 package com.db.mathservice.business;
 
 import com.db.mathservice.data.Range;
-import javafx.util.Pair;
 import org.mariuszgromada.math.mxparser.Expression;
 
 import java.util.Map;

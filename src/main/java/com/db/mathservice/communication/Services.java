@@ -1,4 +1,4 @@
-package com.db.mathservice.controllers;
+package com.db.mathservice.communication;
 
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -15,7 +15,7 @@ public enum Services {
     MATH("mathservice"),
     TELEGRAM("telegram");
 
-    public final String id;
+    private final String id;
 
     Services(String id) {
         this.id = id;

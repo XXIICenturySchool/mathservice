@@ -22,7 +22,8 @@ function addFieldsToForm(args) {
     form.appendChild(divConfigs);
     let inputFrom;
     let inputTo;
-    JSON.parse(args).forEach(function (arg) {
+    let argsArray = JSON.parse(args);
+    argsArray.forEach(function (arg) {
         divConfigs.appendChild(document.createTextNode(arg + " from "));
         inputFrom = document.createElement("input");
         inputFrom.type = "number";
@@ -37,11 +38,15 @@ function addFieldsToForm(args) {
         divConfigs.appendChild(document.createElement("br"));
     });
 
-    const button = document.createElement("input");
-    button.type = "button";
-    button.value = "Submit";
-    button.onclick = onSubmit;
-    divConfigs.appendChild(button);
+    if (argsArray && argsArray.length > 0) {
+        const button = document.createElement("input");
+        button.type = "button";
+        button.value = "Submit";
+        button.onclick = onSubmit;
+        divConfigs.appendChild(button);
+    } else {
+        onSubmit();
+    }
 }
 
 function onSubmit() {
