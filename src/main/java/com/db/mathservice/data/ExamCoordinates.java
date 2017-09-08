@@ -8,5 +8,5 @@ import lombok.Data;
 public class ExamCoordinates {
     private String teacherId;
     private String url;
-    private final String serviceName = "MathService";
+    private final String serviceName = "mathservice";
 }

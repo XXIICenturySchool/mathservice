@@ -27,12 +27,14 @@ function addFieldsToForm(args) {
         divConfigs.appendChild(document.createTextNode(arg + " from "));
         inputFrom = document.createElement("input");
         inputFrom.type = "number";
+        inputFrom.value = "1";
         inputFrom.name = arg + ".from";
         divConfigs.appendChild(inputFrom);
 
         divConfigs.appendChild(document.createTextNode(" to "));
         inputTo = document.createElement("input");
         inputTo.type = "number";
+        inputTo.value = "10";
         inputTo.name = arg + ".to";
         divConfigs.appendChild(inputTo);
         divConfigs.appendChild(document.createElement("br"));
@@ -96,8 +98,10 @@ function draw_table() {
 
     for (let i = 0; i < exam.length; i++) {
         const new_number = i + 1;
-        const new_conf = exam[i].template;
+        let new_conf = exam[i].template;
         const new_count = exam[i].amount;
+        new_conf = new_conf.replace("<", "&lt;");
+        new_conf = new_conf.replace(">", "&gt;");
 
         table.insertRow(new_number).outerHTML = "<tr id='row" + new_number +
             "'><td id='number_row" + new_number + "'>" +

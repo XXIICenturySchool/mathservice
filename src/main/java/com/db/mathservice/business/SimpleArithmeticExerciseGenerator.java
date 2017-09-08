@@ -1,6 +1,7 @@
 package com.db.mathservice.business;
 
 import com.db.mathservice.data.*;
+import lombok.AllArgsConstructor;
 import org.mariuszgromada.math.mxparser.Expression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,11 +12,10 @@ import java.util.stream.Collectors;
 @Service("math.simple_arithmetic")
 public class SimpleArithmeticExerciseGenerator implements ExerciseGenerator {
     private DigitsFiller digitsFiller;
-    private ArgumentSubstituter argumentSubstituter;
-    private ArithmeticExerciseGeneratorImpl arithmeticExerciseGeneratorImpl;
+    private ArgumentSubstituterWithValidation argumentSubstituter;
 
     @Autowired
-    public SimpleArithmeticExerciseGenerator(DigitsFiller digitsFiller, ArgumentSubstituter argumentSubstituter) {
+    public SimpleArithmeticExerciseGenerator(DigitsFiller digitsFiller, ArgumentSubstituterWithValidation argumentSubstituter) {
         this.digitsFiller = digitsFiller;
         this.argumentSubstituter = argumentSubstituter;
     }

@@ -13,7 +13,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public abstract class Exercise {
-    protected String type;
     protected String question;
     protected List<String> answer;
 }
