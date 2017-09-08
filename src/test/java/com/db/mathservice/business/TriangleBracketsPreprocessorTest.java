@@ -10,16 +10,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SquareBracketsPreprocessorTest {
+public class TriangleBracketsPreprocessorTest {
     @Autowired
-    SquareBracketsPreprocessor preprocessor;
+    TriangleBracketsPreprocessor preprocessor;
 
     @Test
     public void process() throws Exception {
-        Assert.assertEquals("1+5", preprocessor.process("1+[2+3]"));
-        Assert.assertEquals("35/5", preprocessor.process("[35]/5"));
-        Assert.assertEquals("10", preprocessor.process("[4+[2*3]]"));
-        Assert.assertEquals("0", preprocessor.process("[[]]"));
+        Assert.assertEquals("1+5", preprocessor.process("1+<2+3>"));
+        Assert.assertEquals("35/5", preprocessor.process("<35>/5"));
+        Assert.assertEquals("10", preprocessor.process("<4+<2*3>>"));
+        Assert.assertEquals("0", preprocessor.process("<<>>"));
     }
 
 }

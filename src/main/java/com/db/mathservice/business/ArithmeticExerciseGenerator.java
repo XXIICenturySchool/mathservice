@@ -12,24 +12,21 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service("math.arithmetic")
-public class ArithmeticExerciseGeneratorImpl implements ExerciseGenerator {
+public class ArithmeticExerciseGenerator implements ExerciseGenerator {
     private DigitsFiller digitsFiller;
     private ArgumentSubstituter argumentSubstituter;
-    private TemplatePreprocessor preprocessor;
 
-    public ArithmeticExerciseGeneratorImpl(DigitsFiller digitsFiller) {
+    public ArithmeticExerciseGenerator(DigitsFiller digitsFiller) {
         this.digitsFiller = digitsFiller;
     }
 
     @Autowired
-    public ArithmeticExerciseGeneratorImpl(DigitsFiller digitsFiller, ArgumentSubstituter argumentSubstituter,
-                                           TemplatePreprocessor preprocessor) {
+    public ArithmeticExerciseGenerator(DigitsFiller digitsFiller, ArgumentSubstituter argumentSubstituter) {
         this.digitsFiller = digitsFiller;
         this.argumentSubstituter = argumentSubstituter;
-        this.preprocessor = preprocessor;
     }
 
-    public ArithmeticExerciseGeneratorImpl(ArgumentSubstituter argumentSubstituter) {
+    public ArithmeticExerciseGenerator(ArgumentSubstituter argumentSubstituter) {
         this.argumentSubstituter = argumentSubstituter;
     }
 
@@ -40,9 +37,8 @@ public class ArithmeticExerciseGeneratorImpl implements ExerciseGenerator {
                 .collect(Collectors.toMap(VariableConstraint::getVarName, o -> new Range(o.getFrom(), o.getTo())));
         template = digitsFiller.fillStringWithMissingDigits(template);
 
-        template = preprocessor.process(template);
         Expression expression = new Expression(template);
-        if (!expression.checkLexSyntax()) {
+        if (!new Expression(template.replaceAll("<", "(").replaceAll(">", ")")).checkLexSyntax()) {
             throw new IllegalStateException(expression.getErrorMessage());
         }
 

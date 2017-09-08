@@ -7,15 +7,15 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 @Service
-public class SquareBracketsPreprocessor implements TemplatePreprocessor {
+public class TriangleBracketsPreprocessor implements TemplatePreprocessor {
 
     public String process(String template) {
         Deque<StringBuilder> partialExpressions = new LinkedList<>();
         partialExpressions.push(new StringBuilder());
         for (int i = 0; i < template.length(); i++) {
-            if (template.charAt(i) == '[') {
+            if (template.charAt(i) == '<') {
                 partialExpressions.push(new StringBuilder());
-            } else if (template.charAt(i) == ']') {
+            } else if (template.charAt(i) == '>') {
                 String substring = partialExpressions.poll().toString();
                 partialExpressions.peek().append(evaluateSubexpression(substring));
             } else {

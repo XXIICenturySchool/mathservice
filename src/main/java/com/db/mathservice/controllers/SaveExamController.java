@@ -1,5 +1,6 @@
 package com.db.mathservice.controllers;
 
+import com.db.mathservice.business.ExamGenerator;
 import com.db.mathservice.dao.ExamConfigurationRepository;
 import com.db.mathservice.dao.LocalGlobalExamIdRelationRepository;
 import com.db.mathservice.data.*;
@@ -27,6 +28,7 @@ import java.net.URL;
 @AllArgsConstructor
 public class SaveExamController {
     ExamConfigurationRepository repository;
+    private ExamGenerator examGenerator;
 
     private DiscoveryClient discoveryClient;
     LocalGlobalExamIdRelationRepository localGlobalExamIdRelationRepository;
@@ -34,6 +36,9 @@ public class SaveExamController {
     @SneakyThrows
     @PostMapping("/save_exam")
     public ExamCoordinates addExam(@RequestBody ExamConfiguration inputConfiguration) {
+        examGenerator.generateExam(inputConfiguration);
+
+
         String localId = repository.save(inputConfiguration).getId();
 
         ExamCoordinates examCoordinates = ExamCoordinates.builder().teacherId(inputConfiguration.getTeacherId())
